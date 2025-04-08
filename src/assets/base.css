@@ -1,0 +1,58 @@
+:root {
+  /* Precise Color Values (Matching Screenshot) */
+  --primary-text: #e0e0e0; /* Off-white for main text */
+  --secondary-text: #a0a0a0; /* Medium gray for subtitle */
+  --card-background: #2a2a2a; /* Dark gray for cards */
+  --background: #191919; /* Very dark gray background */
+  --accent-color: #80a0a0; /* Muted teal accent (if needed) */
+  --particle-color: rgba(255, 255, 255, 0.08); /* Very subtle particles */
+
+  /* Typography */
+  --font-primary: 'Roboto', sans-serif;
+  --font-heading: 'Roboto', sans-serif;
+
+  /* Spacing */
+  --section-padding: 4rem 2rem;
+  --card-border-radius: 8px;
+  --card-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Very subtle shadow */
+  --highlight-card-gap: 1.5rem;
+  --transition-duration: 0.3s;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-primary), sans-serif;
+  background-color: var(--background);
+  color: var(--primary-text);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  color: var(--primary-text);
+  font-weight: 400;
+  margin-bottom: 0.75em;
+}
+
+a {
+  color: var(--secondary-text);
+  text-decoration: none;
+  transition: color var(--animation-speed);
+}
+
+a:hover {
+  color: var(--accent-color);
+}
+
+section {
+  padding: var(--section-padding);
+}
+
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
