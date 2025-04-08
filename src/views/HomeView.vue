@@ -46,7 +46,7 @@ const highlights = ref([
   {
     icon: 'fa-solid fa-briefcase',
     title: 'Experience',
-    details: "Turner Financial (Full Stack Dev) • Bartolotta's", // Kept original experience detail
+    details: "Turner Financial (Full Stack Dev) • Bartolotta's (Bartender)", // Kept original experience detail
   },
   {
     icon: 'fa-solid fa-graduation-cap',
