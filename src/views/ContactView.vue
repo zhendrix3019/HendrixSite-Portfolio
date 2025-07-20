@@ -60,7 +60,7 @@ library.add(faEnvelope, faLinkedin, faGithub);
 const title = ref(null);
 const content = ref(null); // Parent container for stagger animation
 const intro = ref(null);
-const contactMethods = ref(null); // Ref for the container of cards
+const contactMethods = ref(null); // Ref for the container of cardsc
 
 onMounted(() => {
   const tl = gsap.timeline({

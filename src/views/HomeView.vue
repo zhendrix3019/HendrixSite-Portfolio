@@ -1,10 +1,11 @@
 <template>
-  <section class="hero view-container"> <div class="hero-content">
+  <section class="hero view-container"> 
+    <div class="hero-content">
       <div class="profile-image-container">
         <img src="@/assets/meee.jpg" alt="Zachary Hendrix" class="profile-image">
       </div>
       <h1 ref="name" class="name">Zachary Hendrix</h1>
-      <h2 ref="title" class="title">Full Stack & Mobile Developer</h2>
+      <h2 ref="title" class="title">Full Stack Web/Software & Mobile Developer</h2>
       <div class="highlights">
         <div v-for="item in highlights" :key="item.title" class="highlight">
           <div class="icon-container">
@@ -33,20 +34,17 @@ library.add(faCode, faBriefcase, faGraduationCap);
 
 const name = ref(null);
 const title = ref(null);
-// Removed highlightsRef as it's not needed for the animation target
-// const highlightsRef = ref(null);
 
 const highlights = ref([
- {
+  {
     icon: 'fa-solid fa-code',
     title: 'Skills',
-    // Using the expanded list from previous step - adjust as needed
     details: 'Vue.js • C# • .NET • SQL Server • JavaScript (ES6+) • HTML5 • CSS3 • Git • REST APIs • Java • Python (Basic)',
   },
   {
     icon: 'fa-solid fa-briefcase',
     title: 'Experience',
-    details: "Turner Financial (Full Stack Dev) • Bartolotta's (Bartender)", // Kept original experience detail
+    details: "Charles Schwab (Full Stack Dev, 2025)\nTurner Financial (Full Stack Dev, 2024)\nBartolotta's (Bartender, 2023)",
   },
   {
     icon: 'fa-solid fa-graduation-cap',
@@ -58,21 +56,16 @@ const highlights = ref([
 onMounted(() => {
   const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-  // Animate profile image container along with name/title if desired
-  // Example: Add a target for the image container if you want it animated
-  // tl.from('.profile-image-container', { scale: 0.5, opacity: 0, duration: 0.8, delay: 0.1 })
-
   tl.from(name.value, { y: -30, opacity: 0, duration: 1, delay: 0.2 })
     .from(title.value, { y: 30, opacity: 0, duration: 0.8, delay: 0.1 }, '-=0.8')
-    // Corrected animation to target the .highlight class directly
     .from(".highlight", {
       y: 30,
       opacity: 0,
       stagger: 0.15,
       duration: 0.6,
-      delay: 0.5, // Delay after name/title animation
+      delay: 0.5,
       ease: 'elastic.out(1, 0.5)',
-    }, '-=0.6'); // Offset start relative to previous animation
+    }, '-=0.6');
 });
 </script>
 
@@ -180,5 +173,6 @@ p {
   color: #cbd5e1; /* Lighter grey */
   font-size: 0.95rem;
   line-height: 1.5;
+  white-space: pre-line; /* Added to respect newlines in text */
 }
 </style>

@@ -1,10 +1,34 @@
 <template>
   <section class="projects view-container">
     <h2 class="view-title projects-title">My Projects</h2>
+    
+    <!-- New Featured Project Section -->
+    <div class="featured-project">
+      <h3 class="featured-title">Featured Project: Schwab API (2025)</h3>
+      <div class="featured-card">
+        <div class="image-placeholder">
+          <img v-if="featuredProject.image" :src="featuredProject.image" :alt="`${featuredProject.title} Screenshot`">
+          <span v-else>Image Coming Soon</span>
+        </div>
+        <div class="card-content">
+          <h4>{{ featuredProject.title }}</h4>
+          <p>{{ featuredProject.description }}</p>
+          <div class="skills">
+            <span v-for="skill in featuredProject.skills" :key="skill" class="skill-tag">{{ skill }}</span>
+          </div>
+          <div class="project-links" v-if="featuredProject.liveUrl || featuredProject.repoUrl">
+            <a v-if="featuredProject.liveUrl" :href="featuredProject.liveUrl" target="_blank" rel="noopener noreferrer" class="link-button">Live Demo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Existing Projects Grid -->
+    <h3 class="grid-title">Other Projects</h3>
     <div class="projects-grid">
       <div v-for="project in projects" :key="project.title" class="project-card">
         <div class="image-placeholder">
-           <img v-if="project.image" :src="project.image" :alt="`${project.title} Screenshot`">
+          <img v-if="project.image" :src="project.image" :alt="`${project.title} Screenshot`">
           <span v-else>Image Coming Soon</span>
         </div>
         <div class="card-content">
@@ -26,30 +50,35 @@
 <script setup>
 import { ref } from 'vue';
 
-// Helper function to correctly resolve asset URLs
 const getImageUrl = (name) => {
-  // Use import.meta.url to create a URL relative to the current module
-  // The path '../assets/' goes up one level from 'views' to 'src', then into 'assets'
   return new URL(`../assets/${name}`, import.meta.url).href;
 };
 
+// Featured Project (Schwab API) - Integrated new PNG here
+const featuredProject = ref({
+  title: 'Schwab API',
+  description: 'A stock market application integrating the Charles Schwab API for real-time data and automated trading features.', // Placeholder - replace with your actual description
+  skills: ['Vue3', 'Python Flask', 'Charles Schwab Stock Market API'],
+  image: getImageUrl('SchwabAPI.png'), // Updated to your new PNG
+  liveUrl: null, // Add if available
+  repoUrl: 'https://github.com/zhendrix3019?tab=repositories', // Update to specific repo if available
+});
 
+// Other Projects (existing, with years added to titles/descriptions if relevant)
 const projects = ref([
   {
     title: 'Vehicle Vault',
-    description: 'Inventory management system with Vue 3 and .NET backend.',
+    description: 'Vehicle inventory management system with Vue 3 and .NET backend.',
     skills: ['Vue.js', 'C#', '.NET', 'SQL Server'],
-    // --- Use the helper function ---
-    image: getImageUrl('VV.png'), // Make sure 'vehicle-vault.jpg' exists
+    image: getImageUrl('VV.png'),
     liveUrl: null,
     repoUrl: 'https://github.com/zhendrix3019?tab=repositories',
   },
   {
-    title: 'Turner Financial',
+    title: 'Turner Financial (2024)',
     description: 'Financial services website with WordPress customization.',
     skills: ['WordPress', 'PHP', 'JavaScript', 'CSS'],
-    // --- Use the helper function ---
-    image: getImageUrl('tf.png'), // Make sure 'tf.png' exists
+    image: getImageUrl('tf.png'),
     liveUrl: 'https://turnerfinancial.com/',
     repoUrl: null,
   },
@@ -57,31 +86,61 @@ const projects = ref([
     title: 'ItsTrippy',
     description: 'Travel image-sharing platform using Quasar (Vue) and Firebase.',
     skills: ['Vue.js', 'Quasar', 'Firebase', 'JavaScript'],
-    // --- Use the helper function (ensure correct filename casing) ---
-    image: getImageUrl('MyTrips.png'), // Make sure 'MyTrips.png' exists
+    image: getImageUrl('MyTrips.png'),
     liveUrl: null,
     repoUrl: 'https://github.com/zhendrix3019?tab=repositories',
   },
-  // Add more projects as needed
+  // Add Bartolottas if it has a project aspect, e.g.:
+  // {
+  //   title: 'Bartolottas (2023)',
+  //   description: 'Description of any related project or work.',
+  //   skills: ['Relevant skills'],
+  //   image: getImageUrl('bartolottas.png'),
+  //   liveUrl: null,
+  //   repoUrl: null,
+  // },
 ]);
-
-// Optional: GSAP animation remains commented out
-// import { onMounted } from 'vue';
-// import gsap from 'gsap';
-// onMounted(() => {
-//   gsap.from('.project-card', { /* ... */ });
-// });
 </script>
 
 <style scoped>
-/* Styles remain unchanged from your previous version */
-.projects {
-  /* view-container handles padding-top */
+/* Existing styles remain, plus new ones for featured section */
+
+.featured-project {
+  margin-bottom: 3rem;
+  text-align: center;
 }
 
-.projects-title {
- /* view-title handles color, size, margin-bottom */
+.featured-title {
+  font-size: 1.8rem;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
 }
+
+.featured-card {
+  background: rgba(30, 41, 59, 0.9); /* Slightly darker for emphasis */
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.featured-card .image-placeholder {
+  height: 250px; /* Larger image area */
+}
+
+.featured-card h4 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.grid-title {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
 
 .projects-grid {
   display: grid;
@@ -118,9 +177,7 @@ const projects = ref([
 .image-placeholder img {
     width: 100%;
     height: 100%;
-    /* Change this line: */
-    /* object-fit: cover; */ /* FROM */
-    object-fit: contain; /* TO */
+    object-fit: cover; /* Changed to cover to fill without side space */
     display: block;
 }
 
@@ -210,5 +267,14 @@ const projects = ref([
 .link-button:hover {
     background-color: #2ac0b6;
     border-color: #2ac0b6;
+}
+
+/* For the featured project (larger image area) */
+.featured-card .image-placeholder {
+  height: 250px; /* Keep larger height */
+}
+
+.featured-card .image-placeholder img {
+  object-fit: cover; /* Apply same change here */
 }
 </style>
