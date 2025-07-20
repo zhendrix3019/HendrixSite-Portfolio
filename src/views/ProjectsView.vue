@@ -4,7 +4,7 @@
     
     <!-- New Featured Project Section -->
     <div class="featured-project">
-      <h3 class="featured-title">Featured Project: Schwab API (2025)</h3>
+      <h3 class="featured-title">Current Project: Schwab API (2025)</h3>
       <div class="featured-card">
         <div class="image-placeholder">
           <img v-if="featuredProject.image" :src="featuredProject.image" :alt="`${featuredProject.title} Screenshot`">
@@ -24,7 +24,7 @@
     </div>
 
     <!-- Existing Projects Grid -->
-    <h3 class="grid-title">Other Projects</h3>
+    <h3 class="grid-title">Previous Projects</h3>
     <div class="projects-grid">
       <div v-for="project in projects" :key="project.title" class="project-card">
         <div class="image-placeholder">
